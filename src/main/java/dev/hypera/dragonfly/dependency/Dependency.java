@@ -72,7 +72,7 @@ public interface Dependency {
 	 * @return New {@link MavenDependency} instance.
 	 */
 	static MavenDependency maven(int priority, String groupId, String artifactId, String version) {
-		return new MavenDependency(priority, groupId, artifactId, version, new HashSet<>(), String.format(FILENAME_FORMAT, artifactId, version));
+		return new MavenDependency(priority, groupId.replace("\\.", "."), artifactId.replace("\\.", "."), version, new HashSet<>(), String.format(FILENAME_FORMAT, artifactId, version));
 	}
 
 	/**
