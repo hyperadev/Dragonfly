@@ -47,7 +47,7 @@ import org.jetbrains.annotations.ApiStatus.Internal;
  */
 public class Dragonfly {
 
-	private static final String VERSION = "0.3.0-SNAPSHOT";
+	private static final String VERSION = "1.0.0";
 
 	private final int timeout;
 	private final Path directory;
