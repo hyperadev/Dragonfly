@@ -26,6 +26,7 @@ package dev.hypera.dragonfly.loading;
 import java.net.URL;
 import java.net.URLClassLoader;
 import org.jetbrains.annotations.ApiStatus.Internal;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Dragonfly class loader, a child-first {@link URLClassLoader} used for loading Dragonfly's internal dependencies.
@@ -35,17 +36,17 @@ import org.jetbrains.annotations.ApiStatus.Internal;
 @Internal
 public class DragonflyClassLoader extends URLClassLoader {
 
-	public DragonflyClassLoader(ClassLoader classLoader) {
+	public DragonflyClassLoader(@NotNull ClassLoader classLoader) {
 		super(new URL[0], classLoader);
 	}
 
 	@Override
-	public void addURL(URL url) {
+	public void addURL(@NotNull URL url) {
 		super.addURL(url);
 	}
 
 	@Override
-	protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+	protected @NotNull Class<?> loadClass(@NotNull String name, boolean resolve) throws ClassNotFoundException {
 		Class<?> loadedClass = findLoadedClass(name);
 		if (null == loadedClass) {
 			try {

@@ -23,29 +23,33 @@
 
 package dev.hypera.dragonfly.exceptions;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Dragonfly Exception.
  * @author Joshua Sing <joshua@hypera.dev>
  */
 public class DragonflyException extends Exception {
 
+	private static final long serialVersionUID = 3565376065959848642L;
+
 	public DragonflyException() {
 		super();
 	}
 
-	public DragonflyException(String message) {
+	public DragonflyException(@NotNull String message) {
 		super(message);
 	}
 
-	public DragonflyException(String message, Throwable cause) {
+	public DragonflyException(@NotNull String message, @NotNull Throwable cause) {
 		super(message, cause);
 	}
 
-	public DragonflyException(Throwable cause) {
+	public DragonflyException(@NotNull Throwable cause) {
 		super(cause);
 	}
 
-	protected DragonflyException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	protected DragonflyException(@NotNull String message, @NotNull Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 

@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -115,6 +116,7 @@ public class DragonflyBuilder {
 	 *
 	 * @return New {@link Dragonfly} instance.
 	 */
+	@Contract(value = "-> new", pure = true)
 	public @NotNull Dragonfly build() {
 		try {
 			return new Dragonfly(timeout, classLoader, directory, repositories, deleteOnRelocate, statusHandler);

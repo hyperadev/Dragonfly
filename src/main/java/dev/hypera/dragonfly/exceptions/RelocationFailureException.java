@@ -23,25 +23,29 @@
 
 package dev.hypera.dragonfly.exceptions;
 
+import org.jetbrains.annotations.NotNull;
+
 public class RelocationFailureException extends DragonflyException {
+
+	private static final long serialVersionUID = -2817144091943660838L;
 
 	public RelocationFailureException() {
 		super();
 	}
 
-	public RelocationFailureException(String message) {
+	public RelocationFailureException(@NotNull String message) {
 		super(message);
 	}
 
-	public RelocationFailureException(String message, Throwable cause) {
+	public RelocationFailureException(@NotNull String message, @NotNull Throwable cause) {
 		super(message, cause);
 	}
 
-	public RelocationFailureException(Throwable cause) {
+	public RelocationFailureException(@NotNull Throwable cause) {
 		super(cause);
 	}
 
-	protected RelocationFailureException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	protected RelocationFailureException(@NotNull String message, @NotNull Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 

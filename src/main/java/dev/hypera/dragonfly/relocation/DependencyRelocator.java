@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Map;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Dependency relocator.
@@ -49,21 +50,21 @@ import org.jetbrains.annotations.NotNull;
  */
 public class DependencyRelocator {
 
-	private static final String RELOCATED_FILENAME = "%s-relocated.jar";
+	private static final @NotNull String RELOCATED_FILENAME = "%s-relocated.jar";
 
-	private final Dragonfly dragonfly;
+	private final @NotNull Dragonfly dragonfly;
 	private final boolean deleteOld;
 
-	private final DragonflyClassLoader classLoader;
-	private final DependencyLoader dependencyLoader;
+	private final @NotNull DragonflyClassLoader classLoader;
+	private final @NotNull DependencyLoader dependencyLoader;
 
 	private boolean dependenciesLoaded;
 
-	private Constructor<?> constructor;
-	private Method method;
+	private @Nullable Constructor<?> constructor;
+	private @Nullable Method method;
 
 	@Internal
-	public DependencyRelocator(Dragonfly dragonfly, boolean deleteOld) {
+	public DependencyRelocator(@NotNull Dragonfly dragonfly, boolean deleteOld) {
 		this.dragonfly = dragonfly;
 		this.deleteOld = deleteOld;
 		this.classLoader = new DragonflyClassLoader(getClass().getClassLoader());

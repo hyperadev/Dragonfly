@@ -32,10 +32,10 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Relocation {
 
-	private final String from;
-	private final String to;
+	private final @NotNull String from;
+	private final @NotNull String to;
 
-	private Relocation(String from, String to) {
+	private Relocation(@NotNull String from, @NotNull String to) {
 		this.from = from.replace("\\.", ".");
 		this.to = to;
 	}
@@ -44,11 +44,11 @@ public class Relocation {
 		return new Relocation(from, to);
 	}
 
-	public String getFrom() {
+	public @NotNull String getFrom() {
 		return from;
 	}
 
-	public String getTo() {
+	public @NotNull String getTo() {
 		return to;
 	}
 

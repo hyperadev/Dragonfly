@@ -23,25 +23,29 @@
 
 package dev.hypera.dragonfly.exceptions;
 
+import org.jetbrains.annotations.NotNull;
+
 public class LoadFailureException extends DragonflyException {
+
+	private static final long serialVersionUID = -8555618454694039541L;
 
 	public LoadFailureException() {
 		super();
 	}
 
-	public LoadFailureException(String message) {
+	public LoadFailureException(@NotNull String message) {
 		super(message);
 	}
 
-	public LoadFailureException(String message, Throwable cause) {
+	public LoadFailureException(@NotNull String message, @NotNull Throwable cause) {
 		super(message, cause);
 	}
 
-	public LoadFailureException(Throwable cause) {
+	public LoadFailureException(@NotNull Throwable cause) {
 		super(cause);
 	}
 
-	protected LoadFailureException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	protected LoadFailureException(@NotNull String message, @NotNull Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 

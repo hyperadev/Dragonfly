@@ -29,6 +29,7 @@ import dev.hypera.dragonfly.exceptions.LoadFailureException;
 import java.net.MalformedURLException;
 import java.util.List;
 import org.jetbrains.annotations.ApiStatus.Internal;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Dependency loader.
@@ -37,11 +38,11 @@ import org.jetbrains.annotations.ApiStatus.Internal;
  */
 public class DependencyLoader {
 
-	private final Dragonfly dragonfly;
-	private final IClassLoader classLoader;
+	private final @NotNull Dragonfly dragonfly;
+	private final @NotNull IClassLoader classLoader;
 
 	@Internal
-	public DependencyLoader(Dragonfly dragonfly, IClassLoader classLoader) {
+	public DependencyLoader(@NotNull Dragonfly dragonfly, @NotNull IClassLoader classLoader) {
 		this.dragonfly = dragonfly;
 		this.classLoader = classLoader;
 	}
@@ -52,7 +53,7 @@ public class DependencyLoader {
 	 * @param dependencies Dependencies to be loaded.
 	 * @throws LoadFailureException if something went wrong while loading the dependencies.
 	 */
-	public void load(List<Dependency> dependencies) throws LoadFailureException {
+	public void load(@NotNull List<Dependency> dependencies) throws LoadFailureException {
 		for (Dependency dependency : dependencies) {
 			load(dependency);
 		}
@@ -64,7 +65,7 @@ public class DependencyLoader {
 	 * @param dependency Dependency to be loaded.
 	 * @throws LoadFailureException if something went wrong while loading the dependency.
 	 */
-	private void load(Dependency dependency) throws LoadFailureException {
+	private void load(@NotNull Dependency dependency) throws LoadFailureException {
 		try {
 			classLoader.addURL(dragonfly.getDirectory().resolve(dependency.getFileName()).toUri().toURL());
 		} catch (MalformedURLException ex) {

@@ -40,6 +40,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import org.jetbrains.annotations.ApiStatus.Internal;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Main Dragonfly class.
@@ -47,16 +48,16 @@ import org.jetbrains.annotations.ApiStatus.Internal;
  */
 public class Dragonfly {
 
-	private static final String VERSION = "0.3.0-SNAPSHOT";
+	private static final @NotNull String VERSION = "0.3.1-SNAPSHOT";
 
 	private final int timeout;
-	private final Path directory;
-	private final Set<String> repositories;
-	private final Consumer<Status> statusHandler;
+	private final @NotNull Path directory;
+	private final @NotNull Set<String> repositories;
+	private final @NotNull Consumer<Status> statusHandler;
 
-	private final DependencyDownloader dependencyDownloader = new DependencyDownloader(this);
-	private final DependencyRelocator dependencyRelocator;
-	private final DependencyLoader dependencyLoader;
+	private final @NotNull DependencyDownloader dependencyDownloader = new DependencyDownloader(this);
+	private final @NotNull DependencyRelocator dependencyRelocator;
+	private final @NotNull DependencyLoader dependencyLoader;
 
 
 	@Internal
@@ -74,7 +75,7 @@ public class Dragonfly {
 		}
 	}
 
-	public static String getVersion() {
+	public static @NotNull String getVersion() {
 		return VERSION;
 	}
 
@@ -84,7 +85,7 @@ public class Dragonfly {
 	 * @param dependencies Dependencies to be loaded.
 	 * @return If the load was successful, in the form of a {@link CompletableFuture<Boolean>}.
 	 */
-	public CompletableFuture<Boolean> load(Dependency... dependencies) {
+	public @NotNull CompletableFuture<Boolean> load(@NotNull Dependency... dependencies) {
 		return CompletableFuture.supplyAsync(() -> {
 			try {
 				statusHandler.accept(Status.STARTING);
@@ -137,11 +138,11 @@ public class Dragonfly {
 		return timeout;
 	}
 
-	public Path getDirectory() {
+	public @NotNull Path getDirectory() {
 		return directory;
 	}
 
-	public Set<String> getRepositories() {
+	public @NotNull Set<String> getRepositories() {
 		return repositories;
 	}
 
@@ -151,7 +152,7 @@ public class Dragonfly {
 	 * @return Stored instance of {@link DependencyDownloader}.
 	 */
 	@Internal
-	public DependencyDownloader getDependencyDownloader() {
+	public @NotNull DependencyDownloader getDependencyDownloader() {
 		return dependencyDownloader;
 	}
 

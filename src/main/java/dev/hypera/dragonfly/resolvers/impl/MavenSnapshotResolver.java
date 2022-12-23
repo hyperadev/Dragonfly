@@ -27,16 +27,19 @@ import dev.hypera.dragonfly.Dragonfly;
 import dev.hypera.dragonfly.dependency.impl.MavenDependency;
 import dev.hypera.dragonfly.exceptions.ResolveFailureException;
 import dev.hypera.dragonfly.resolvers.IResolver;
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
+import sun.tools.jstat.ParserException;
 
 /**
  * Maven snapshot resolver.
@@ -45,8 +48,26 @@ import org.xml.sax.InputSource;
  */
 public class MavenSnapshotResolver implements IResolver<MavenDependency> {
 
-	private static final String FORMAT = "%s%s/%s/%s/maven-metadata.xml";
-	private static final String OUTPUT_FORMAT = "%s/%s-%s-%s-%s.jar";
+	private static final @NotNull String FORMAT = "%s%s/%s/%s/maven-metadata.xml";
+	private static final @NotNull String OUTPUT_FORMAT = "%s/%s-%s-%s-%s.jar";
+	private final @NotNull DocumentBuilderFactory documentBuilderFactory;
+
+	public MavenSnapshotResolver() {
+		try {
+			/* The below is an attempt to create an XML parser while preventing XML External Entity attacks */
+			/* Read more: https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html#java */
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+			factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+			factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+			factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+			factory.setXIncludeAware(false);
+			factory.setExpandEntityReferences(false);
+			this.documentBuilderFactory = factory;
+		} catch (ParserConfigurationException ex) {
+			throw new RuntimeException("Failed to create DocumentBuilderFactory", ex);
+		}
+	}
 
 	@Override
 	public @Nullable String resolve(@NotNull Dragonfly dragonfly, @NotNull MavenDependency dependency) throws ResolveFailureException {
@@ -72,7 +93,7 @@ public class MavenSnapshotResolver implements IResolver<MavenDependency> {
 			}
 
 			try {
-				DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+				DocumentBuilder builder = documentBuilderFactory.newDocumentBuilder();
 				Document document = builder.parse(new InputSource(new StringReader(data)));
 				Element root = document.getDocumentElement();
 				Element snapshotData = (Element) root.getElementsByTagName("snapshot").item(0);

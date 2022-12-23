@@ -41,8 +41,8 @@ import org.jetbrains.annotations.NotNull;
 @Downloader(MavenDependency.class)
 public class MavenDownloader implements IDownloader<MavenDependency> {
 
-	private final MavenResolver resolver = new MavenResolver();
-	private final MavenSnapshotResolver snapshotResolver = new MavenSnapshotResolver();
+	private final @NotNull MavenResolver resolver = new MavenResolver();
+	private final @NotNull MavenSnapshotResolver snapshotResolver = new MavenSnapshotResolver();
 
 	@Override
 	public void download(@NotNull Dragonfly dragonfly, @NotNull MavenDependency dependency) throws DownloadFailureException {

@@ -23,25 +23,29 @@
 
 package dev.hypera.dragonfly.exceptions;
 
+import org.jetbrains.annotations.NotNull;
+
 public class DownloadFailureException extends DragonflyException {
+
+	private static final long serialVersionUID = 5648475409314204882L;
 
 	public DownloadFailureException() {
 		super();
 	}
 
-	public DownloadFailureException(String message) {
+	public DownloadFailureException(@NotNull String message) {
 		super(message);
 	}
 
-	public DownloadFailureException(String message, Throwable cause) {
+	public DownloadFailureException(@NotNull String message, @NotNull Throwable cause) {
 		super(message, cause);
 	}
 
-	public DownloadFailureException(Throwable cause) {
+	public DownloadFailureException(@NotNull Throwable cause) {
 		super(cause);
 	}
 
-	protected DownloadFailureException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	protected DownloadFailureException(@NotNull String message, @NotNull Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 

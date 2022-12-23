@@ -40,7 +40,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class MavenResolver implements IResolver<MavenDependency> {
 
-	private static final String FORMAT = "%s%s/%s/%s/%s-%s.jar";
+	private static final @NotNull String FORMAT = "%s%s/%s/%s/%s-%s.jar";
 
 	@Override
 	public @Nullable String resolve(@NotNull Dragonfly dragonfly, @NotNull MavenDependency dependency) throws ResolveFailureException {
